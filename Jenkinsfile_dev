@@ -1,0 +1,36 @@
+pipeline {
+  agent any
+
+  environment {
+    SERVICE_NAME = "unibit-horse-racing-user"
+    SERVER_CREDENTIAL_USR = credentials('SERVER_CREDENTIAL_USR')
+    SERVER_IP = credentials('SERVER_IP')
+  }
+
+  stages {
+    stage('Build') { 
+      steps {
+        script {
+        sh 'echo Start build ...'
+        env.COMMIT_HASH = sh(script:'git rev-parse --short=8 HEAD', returnStdout: true).trim()
+        sh 'echo $COMMIT_HASH'
+        sh 'echo Build started on `date`'
+        sh 'echo Building the Docker image $SERVICE_NAME:$COMMIT_HASH ...'
+        sh 'printenv > .env'
+        sh 'docker build -t $SERVICE_NAME:$COMMIT_HASH .'
+        }
+      }
+    }
+    stage('Deploy') { 
+      steps {
+        script {
+          env.COMMIT_HASH = sh(script:'git rev-parse --short=8 HEAD', returnStdout: true).trim()
+          sh '''
+            echo "Deploy commit $COMMIT_HASH"
+            ssh ${SERVER_CREDENTIAL_USR}@${SERVER_IP} "cd /home/sotate/workspace/deployment/user/app && ls -la && echo $COMMIT_HASH && sed -i 's|unibit-horse-racing-user:.*|unibit-horse-racing-user:'${COMMIT_HASH}'|g' docker-compose.yml && docker-compose up -d"
+          '''
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "Index": {
+    "title": "chang cheng!"
+  },
+  "auth-form": {
+    "title": "登录",
+    "email-placeholder": "电子邮件",
+    "password-placeholder": "密码",
+    "password-required-message": "此字段为必填项",
+    "email-required-message": "此字段为必填项",
+    "email-type-message": "无效的电子邮件",
+    "remember-password": "记住密码",
+    "forgot-password": "忘记密码？",
+    "login-text": "登录",
+    "account-question": "没有帐户？",
+    "sign-up": "注册",
+    "or": "或",
+    "recaptcha-error": "Please complete reCaptcha verification to login",
+    "account-not-found-message": "There is not an account associated with this email",
+    "wrong-password-message": "Password is incorrect",
+    "inactive-account": "Your account has been suspended. Please contact our admin for support.",
+    "existed-user": "There is already an account associated with this email.",
+    "phone-exist": "Phone number already exists.",
+    "username-existed": "Username is already taken.",
+    "login-fail": "Login fail. Try again",
+    "register-fail": "Register fail. Try again"
+  }
+}

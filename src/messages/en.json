@@ -1,0 +1,29 @@
+{
+  "Index": {
+    "title": "Hello world!"
+  },
+  "auth-form": {
+    "title": "Login",
+    "email-placeholder": "Email",
+    "password-placeholder": "Password",
+    "password-required-message": "This field is required",
+    "email-required-message": "This field is required",
+    "email-type-message": "Invalid email",
+    "password-length-message": "Invalid password",
+    "remember-password": "Remember password",
+    "forgot-password": "Forgot Password?",
+    "login-text": "Login",
+    "account-question": "Don’t have an account?",
+    "sign-up": "Sign Up",
+    "or": "Or",
+    "recaptcha-error": "Please complete reCaptcha verification to login",
+    "account-not-found-message": "There is not an account associated with this email",
+    "wrong-password-message": "Password is incorrect",
+    "inactive-account": "Your account has been suspended. Please contact our admin for support.",
+    "existed-user": "There is already an account associated with this email.",
+    "phone-exist": "Phone number already exists.",
+    "username-existed": "Username is already taken.",
+    "login-fail": "Login fail. Try again",
+    "register-fail": "Register fail. Try again"
+  }
+}

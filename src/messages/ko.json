@@ -1,0 +1,28 @@
+{
+  "Index": {
+    "title": "kore!"
+  },
+  "auth-form": {
+    "title": "로그인",
+    "email-placeholder": "이메일",
+    "password-placeholder": "비밀번호",
+    "password-required-message": "이 필드는 필수입니다",
+    "email-required-message": "이 필드는 필수입니다",
+    "email-type-message": "잘못된 이메일",
+    "remember-password": "비밀번호를 기억하세요",
+    "forgot-password": "비밀번호를 잊으셨나요?",
+    "login-text": "로그인",
+    "account-question": "계정이 없나요?",
+    "sign-up": "가입",
+    "or": "또는",
+    "recaptcha-error": "Please complete reCaptcha verification to login",
+    "account-not-found-message": "There is not an account associated with this email",
+    "wrong-password-message": "Password is incorrect",
+    "inactive-account": "Your account has been suspended. Please contact our admin for support.",
+    "existed-user": "There is already an account associated with this email.",
+    "phone-exist": "Phone number already exists.",
+    "username-existed": "Username is already taken.",
+    "login-fail": "Login fail. Try again",
+    "register-fail": "Register fail. Try again"
+  }
+}

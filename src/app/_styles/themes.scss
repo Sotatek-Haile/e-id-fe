@@ -1,0 +1,225 @@
+@import "./colors.scss";
+
+:root {
+  --text-main: #{$black};
+  --background-main: #{$white};
+  --border: #{$gray};
+  --background-header: #{$bg-header};
+  --text-header: #{$gray-6};
+
+  // divider
+  --divider-bg: #{$gray-4};
+  // divider
+
+  /* Button variable */
+  --btn-primary-bg: #{$primary};
+  --btn-primary-border-disabled: #{$gray};
+  --btn-primary-bg-disabled: #{$gray};
+  --btn-primary-text-disabled: #{$gray-4};
+  --btn-primary-small-text-disabled: #{$gray};
+  --btn-primary-small-bg-disabled: #{$gray-7};
+
+  --btn-primary-bg-hover: #{$primary-darker};
+
+  --btn-primary-red-bg: #{$red};
+  --btn-primary-red-bg-hover: #{$red-darker};
+
+  --btn-primary-yellow-bg: #{$yellow};
+  --btn-primary-yellow-bg-hover: #{$yellow-darker};
+
+  --btn-primary-purple-bg: #{$purple};
+  --btn-primary-purple-bg-hover: #{$purple-darker};
+
+  --btn-primary-green-bg: #{$green};
+  --btn-primary-green-bg-hover: #{$green-darker};
+
+  --btn-primary-gray-bg: #{$gray};
+  --btn-primary-gray-text: #{$gray-6};
+  --btn-primary-gray-bg-hover: #{$gray-darker};
+  --btn-primary-gray-text-hover: #{$gray-6};
+
+  --btn-default-text-disabled: #{$gray-13};
+  --btn-default-border-disabled: #{$gray-13};
+
+  --btn-default-border: #{$primary};
+  --btn-default-text: #{$primary};
+  --btn-default-bg-hover: #{$blue-lighter-bg};
+
+  --btn-default-red-border: #{$red};
+  --btn-default-red-text: #{$red};
+  --btn-default-red-border-hover: #{$red};
+  --btn-default-red-text-hover: #{$red-lighter};
+  --btn-default-red-bg-hover: #{$red-lighter-2};
+
+  --btn-default-purple-text: #{$purple};
+  --btn-default-purple-border: #{$purple};
+  --btn-default-purple-text-hover: #{$purple};
+  --btn-default-purple-border-hover: #{$purple};
+  --btn-default-purple-bg-hover: #{$purple-lighter};
+
+  --btn-default-yellow-text: #{$yellow};
+  --btn-default-yellow-border: #{$yellow};
+  --btn-default-yellow-text-hover: #{$yellow-darker};
+  --btn-default-yellow-border-hover: #{$yellow};
+  --btn-default-yellow-bg-hover: #{$yellow-lighter-3};
+
+  --btn-default-gray-text: #{$gray-6};
+  --btn-default-gray-border: #{$gray-6};
+  --btn-default-gray-text-hover: #{$gray-6};
+  --btn-default-gray-border-hover: #{$gray-6};
+  --btn-default-gray-bg-hover: #{$gray-lighter-2};
+
+  --btn-default-green-text: #{$green};
+  --btn-default-green-border: #{$green};
+  --btn-default-green-text-hover: #{$green};
+  --btn-default-green-border-hover: #{$green};
+  --btn-default-green-bg-hover: #{$green-lighter-2};
+
+  --btn-text-color: #{$primary};
+  --btn-text-color-hover: #{$primary};
+  --btn-text-bg-hover: #{$primary-lighter};
+  --btn-text-color-disabled: #{$gray-4};
+
+  --btn-text-red-text: #{$red};
+  --btn-text-red-bg-hover: #{$red-lighter-2};
+  --btn-text-red-text-hover: #{$red-darker};
+
+  --btn-text-yellow-text: #{$yellow};
+  --btn-text-yellow-text-hover: #{$yellow-darker};
+  --btn-text-yellow-bg-hover: #{$yellow-lighter-3};
+
+  --btn-text-purple-text: #{$purple};
+  --btn-text-purple-text-hover: #{$purple};
+  --btn-text-purple-bg-hover: #{$purple-lighter};
+
+  --btn-text-green-text: #{$green};
+  --btn-text-green-text-hover: #{$green};
+  --btn-text-green-bg-hover: #{$green-lighter-2};
+
+  --btn-text-gray-text: #{$gray-6};
+  --btn-text-gray-text-hover: #{$black};
+  --btn-text-gray-bg-hover: #{$gray-lighter-2};
+
+  /* Input variable */
+  --input-border: #{$gray-4};
+  --input-text-placeholder: #{$gray-4};
+  --input-text: #{$black-1};
+  --input-border-hover: #{$primary};
+  --input-border-error: #{$red};
+  --input-bg-error: #{$red-lighter-3};
+  --input-label: #{$gray-2};
+  --input-bg-disabled: #{$gray-lighter-3};
+  /* Input variable */
+
+  /* Tooltip variable */
+  --tooltip-bg: #{$gray-6};
+  /* Tooltip variable */
+
+  /* Checkbox variable */
+  --checkbox-border-unchecked: #{$gray-4};
+  --checkbox-border-checked: #{$primary};
+  --checkbox-bg-checked: #{$primary};
+  /* Checkbox variable */
+
+  /* Switch variable */
+  --switch-bg-checked: #{$primary};
+  --switch-bg-unchecked: #{$gray-14};
+  --switch-bg-unchecked-hover: #{$gray-4};
+  /* Switch variable */
+  --white: #{$white};
+  --link-color: #{$blue-1};
+  --telegram-bg-color: #{$blue-2};
+
+  /* Modal */
+  --modal-border: #{$gray-15};
+
+  /* Select variable */
+  --select-primary-border-error: #{$red};
+  --select-primary-border: #{$gray-4};
+
+  --select-dropdown-primary-bg: #{$black-5};
+
+  --select-item-bg-hover: #{$black-6};
+  --select-item-bg-selected: #{$blue-4};
+
+  --select-tree-checkbox-bg: #{$blue};
+  --select-tree-checkbox-border: #{$gray-4};
+  --select-tree-checkbox-bg-hover: #{$blue-3};
+  --select-tree-bg-hr: #{$gray-16};
+  /* Select variable */
+  /* Login form */
+  --login-form-text-gray: #{$gray-6};
+
+  /* Auth code*/
+  --auth-code-bg: #{$gray-3};
+  --auth-code-text-color: #{$primary};
+  --auth-code-error-border: #{$red};
+  --auth-code-error-bg: #{$red-lighter-4};
+  --auth-code-error-text: #{$red};
+  --auth-code-text-gray: #{$gray-2};
+
+  /* Side bar */
+  --side-bar-bg: #{$white};
+  --side-bar-hover-bg: #{$blue-5};
+  --side-bar-active-tag-bg: #{$blue-6};
+
+  /* App tab */
+  --tab-border: #{$gray-17};
+
+  /* App Table */
+  --table-header-bg: #{$blue-6};
+  --table-row-bg-hover: #{$blue-7};
+  --runner-white: #{$white-2};
+  --table-border: #{$blue-8};
+
+  /* App pagination */
+  --paginate-active-item-bg: #{$blue-lighter-2};
+  --paginate-item-color: #{$black};
+  --paginate-active-jump: #{$blue-1};
+
+  // Var tailwind
+  --primary: #{$primary};
+  --blue-6: #{$blue-6};
+  --blue-opacity: #{$blue-opacity};
+  --red: #{$red};
+  --red-lighter-4: #{$red-lighter-4};
+  --red-lighter-5: #{$red-lighter-5};
+  --red-lighter-6: #{$red-lighter-6};
+  --red-lighter-7: #{$red-lighter-7};
+
+  --white-1: #{$white-1};
+
+  --purple: #{$purple};
+  --yellow: #{$yellow};
+
+  --green: #{$green};
+  --green-1: #{$green-1};
+  --light-green: #{$green-lighter-3};
+
+  --gray: #{$gray};
+  --light-gray: #{$light-gray};
+  --gray-1: #{$gray-1};
+  --gray-2: #{$gray-2};
+  --gray-3: #{$gray-3};
+  --gray-4: #{$gray-4};
+  --gray-5: #{$gray-5};
+  --gray-6: #{$gray-6};
+  --gray-7: #{$gray-7};
+  --gray-15: #{$gray-15};
+  --gray-17: #{$gray-17};
+  --gray-18: #{$gray-18};
+
+  --black-1: #{$black-1};
+  --black-2: #{$black-2};
+}
+
+// @media (prefers-color-scheme: light) {
+//   :root {
+//     --text-main: #{$black};
+//     --background-main: #{$white};
+//   }
+// }
+
+// body[data-theme="light"] {
+
+// }

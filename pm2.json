@@ -1,0 +1,8 @@
+{
+    "apps": [
+        {
+            "name": "urh-user",
+            "script": "yarn start"
+        }
+    ]
+}
