@@ -1,0 +1,14 @@
+
+.login {
+  height: 100vh;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  &__btn {
+    height: 48px !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+}

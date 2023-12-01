@@ -1,0 +1,21 @@
+.person-page {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .header {
+    background: white;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    border-radius: 10px;
+  }
+
+  .body {
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+  }
+}

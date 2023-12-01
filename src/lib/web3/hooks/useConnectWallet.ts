@@ -5,12 +5,14 @@ import { signMessage } from "../helpers";
 import { ConnectorKey, connectors } from "../connectors";
 import { baseQueryApi } from "@lib/redux/baseQueryApi";
 import { useAppDispatch } from "@lib/redux/store";
+import { useRouter } from "next/navigation";
 /**
  * Hook for connect/disconnect to a wallet
  * @returns `connectWallet` and `disconnectWallet` functions .
  */
 export const useConnectWallet = () => {
   const { connector: appConnector } = useWeb3React();
+  const route = useRouter()
   const dispatch = useAppDispatch();
   const getAccountConnected = async (provider: Web3Provider) => {
     const signer = provider.getSigner();

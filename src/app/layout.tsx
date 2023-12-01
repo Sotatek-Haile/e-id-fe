@@ -2,12 +2,12 @@
 import "@app/_styles/globals.scss";
 import StyledComponentsRegistry from "@lib/antd/AntdRegistry";
 import ThemeConfigProvider from "@lib/antd/ConfigProvider";
-import GGOAuthProvider from "@lib/google/auth/GoogleOAuthProvider";
 import { locales } from "@lib/next-intl";
 import { ReduxProvider } from "@lib/redux/provider";
 import { W3Provider } from "@lib/web3/provider";
 import { Inter } from "next/font/google";
 import React from "react";
+import Layout from "./_components/layout/page";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,19 +22,18 @@ export function generateStaticParams() {
 
 const RootLayout = async ({ children }: React.PropsWithChildren & any) => {
   const className = inter.className + " bg-light-gray";
+
   return (
     <html>
       <head></head>
       <body data-theme="light" className={className}>
-        <GGOAuthProvider>
-          <W3Provider>
-            <StyledComponentsRegistry>
-              <ThemeConfigProvider>
-                <ReduxProvider>{children}</ReduxProvider>
-              </ThemeConfigProvider>
-            </StyledComponentsRegistry>
-          </W3Provider>
-        </GGOAuthProvider>
+        <W3Provider>
+          <StyledComponentsRegistry>
+            <ReduxProvider>
+              <ThemeConfigProvider>{children}</ThemeConfigProvider>
+            </ReduxProvider>
+          </StyledComponentsRegistry>
+        </W3Provider>
       </body>
     </html>
   );

@@ -1,0 +1,230 @@
+.awayday-sidebar-wrap {
+  background-color: white;
+  box-shadow: -40px -43px 39px 19px #989898;
+  height: 100vh;
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 100;
+
+  .ant-layout-sider-children {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar-head {
+    height: 76px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 26px;
+
+    &-space {
+      width: 1px;
+      height: 14px;
+      background: #d1d1d1;
+      margin: 0 8px;
+    }
+
+    &-text {
+      color: #999;
+      font-size: 1.5rem;
+      font-style: normal;
+      font-weight: 300;
+      line-height: 140%;
+    }
+  }
+
+  .sidebar-menu {
+    padding: 16px 12px 3px;
+    border-bottom: 1px solid #e5e7eb;
+    border-inline-end: none !important;
+
+    .ant-menu-item {
+      $color-tab-item: #4d4d4d;
+
+      margin: 0;
+      color: #4d4d4d;
+      margin-bottom: 17px;
+      height: 38px;
+      border-radius: 5px;
+      padding: 8px !important;
+      width: 100%;
+
+      .ant-menu-item-icon path {
+        fill: #4d4d4d;
+      }
+
+      .ant-menu-title-content {
+        font-size: 1rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 150%;
+        letter-spacing: -0.16px;
+        margin: 0;
+      }
+
+      .side-notification-tab {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        span {
+          width: 20px;
+          height: 20px;
+          border-radius: 20px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background: rgba(238, 81, 30, 0.16);
+
+          color: #ee511e;
+          text-align: center;
+          font-size: 1rem;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 150%;
+
+          &.noti-large {
+            width: 22px;
+            height: 22px;
+            font-size: 10px;
+          }
+        }
+      }
+    }
+
+    .ant-menu-inline .ant-menu-submenu-title {
+      padding-left: 0 !important;
+      padding-inline: 5px !important;
+    }
+
+    .ant-menu-item-selected {
+      background: rgba(238, 81, 30, 0.07);
+
+      color: red;
+
+      .ant-menu-item-icon path {
+        fill: red;
+        stroke: transparent;
+      }
+    }
+  }
+
+  .other-action {
+    padding: 24px 12px 26px;
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+
+    &-menu {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      width: 100%;
+
+      &-item {
+        width: 100%;
+        height: 37px;
+        margin-bottom: 22px;
+        gap: 16px;
+        padding: 8px;
+        border-radius: 5px;
+
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.06);
+        }
+
+        span {
+          color: #4d4d4d;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 150%;
+          letter-spacing: -0.16px;
+        }
+      }
+    }
+
+    &-btn {
+      width: 100%;
+      height: 46px;
+      border-radius: 2px;
+      border: 1px solid rgba(70, 70, 70, 0.03);
+      background: rgba(217, 217, 217, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #3b3b3b;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 150%;
+      letter-spacing: -0.16px;
+
+      &:hover {
+        border-color: rgba(70, 70, 70, 0.1) !important;
+        color: #3b3b3b !important;
+      }
+    }
+  }
+}
+
+.awayday-layout {
+  margin-left: 250px;
+}
+
+.ant-menu-inline {
+  background: none !important;
+
+  .ant-menu-submenu-title {
+    margin-inline: 0 !important;
+    margin-block: 0 !important;
+  }
+
+  .ant-menu-item {
+    padding: 8px 8px 8px 12px !important;
+  }
+
+  .ant-menu-submenu-title {
+    padding-left: 0;
+    padding-inline: 8px !important;
+    margin-bottom: 16px !important;
+    width: 100%;
+
+    .ant-menu-title-content {
+      font-family: Inter;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 150%;
+      letter-spacing: -0.04px;
+    }
+
+    .ant-menu-item-icon+span {
+      margin-inline-start: 22px;
+    }
+  }
+}
+
+.ant-menu-sub {
+  padding: 0 12px !important;
+  margin: -16px 0 8px !important;
+
+  .ant-menu-item {
+    margin: 8px auto 8px !important;
+  }
+
+  .ant-menu-item-selected {
+    margin: 8px 0 8px 8px !important;
+  }
+}
+
+.ant-menu-submenu-selected {
+  path {
+    fill: #ee511e;
+  }
+}

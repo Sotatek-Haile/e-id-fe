@@ -1,6 +1,6 @@
 import React from "react";
 
 export default function page() {
-  console.log('zoday22')
-  return <div>main</div>;
+  console.log('zo2day')
+  return <div>oke2</div>;
 }
