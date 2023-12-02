@@ -8,7 +8,7 @@ import { ColumnsType } from "antd/es/table";
 import dayjs from "dayjs";
 import { useState } from "react";
 import "./styles.scss";
-import { useGetAllUserQuery } from "./_apis";
+import { useGetAllUserQuery } from "../../../../../_stores/admin/persons/api";
 export default function Page() {
   const [openModal, setOpenModal] = useState(false);
   const { data, isLoading } = useGetAllUserQuery({});

@@ -1,20 +1,17 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { User, UserProfile } from "./type";
+import { COOKIES_KEY } from "@app/_constants";
+import { createSlice } from "@reduxjs/toolkit";
+import Cookies from "js-cookie";
 
 export type AuthStates = {
-  accessToken: string | null;
-  currentAccount: string | null;
-  wallet: string | null;
-  user: User | UserProfile | null;
-  refreshToken: string | null;
+  account: string | null;
+  message: string | null;
+  signature: string | null;
 };
 
 const initialState: AuthStates = {
-  accessToken: null,
-  currentAccount: null,
-  wallet: null,
-  user: null,
-  refreshToken: null,
+  account: null,
+  message: null,
+  signature: null,
 };
 
 // slice
@@ -22,34 +19,27 @@ export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    logout: (state) => {
-      state.accessToken = null;
-      state.currentAccount = null;
-      state.refreshToken = null;
-      state.user = null;
-      state.wallet = null;
+    setUser: (state, actions: any) => {
+      state.account = actions.payload.account;
+      state.message = actions.payload.message;
+      state.signature = actions.payload.signature;
+
+      Cookies.set(COOKIES_KEY.ACCOUNT, actions.payload.account, { expires: 10 });
+      Cookies.set(COOKIES_KEY.TOKEN, actions.payload.signature, { expires: 10 });
     },
-    setAuthInfo: (state, actions: PayloadAction<AuthStates>) => {
-      state.accessToken = actions.payload.accessToken;
-      state.currentAccount = actions.payload.currentAccount;
-      state.refreshToken = actions.payload.refreshToken;
-      state.user = actions.payload.user;
-      state.wallet = actions.payload.wallet;
-    },
-    setUserInfo: (state, action: PayloadAction<User | UserProfile | null>) => {
-      state.user = action.payload;
-    },
-    setRefreshToken: (state, actions: PayloadAction<string | null>) => {
-      state.refreshToken = actions.payload;
-    },
-    setWallet: (state, actions: PayloadAction<string | null>) => {
-      state.wallet = actions.payload;
+    removeUser: (state) => {
+      state.account = null;
+      state.message = null;
+      state.signature = null;
+
+      Cookies.remove(COOKIES_KEY.ACCOUNT);
+      Cookies.remove(COOKIES_KEY.TOKEN);
     },
   },
 });
 
 // actions
-export const { logout, setRefreshToken, setAuthInfo, setWallet, setUserInfo } = userSlice.actions;
+export const { setUser, removeUser } = userSlice.actions;
 
 // reducer
 export const userReducer = userSlice.reducer;

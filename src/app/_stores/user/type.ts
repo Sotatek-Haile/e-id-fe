@@ -1,5 +1,3 @@
-import { EUserStatus } from "@app/_components/auth-modal/constants";
-
 export interface ResetPasswordParams {
   token: string; // token from reCaptcha
   resetPassToken: string | null; //token from gmail
@@ -37,7 +35,6 @@ export interface User {
   receiveNoti: number;
   referenceCode: string;
   role: string;
-  status: EUserStatus;
   teleKey: null;
   updatedAt: string;
   username: string;

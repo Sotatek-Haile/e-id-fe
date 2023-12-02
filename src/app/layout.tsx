@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-sync-scripts */
 import "@app/_styles/globals.scss";
 import StyledComponentsRegistry from "@lib/antd/AntdRegistry";
 import ThemeConfigProvider from "@lib/antd/ConfigProvider";
@@ -7,7 +6,6 @@ import { ReduxProvider } from "@lib/redux/provider";
 import { W3Provider } from "@lib/web3/provider";
 import { Inter } from "next/font/google";
 import React from "react";
-import Layout from "./_components/layout/page";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,7 +23,6 @@ const RootLayout = async ({ children }: React.PropsWithChildren & any) => {
 
   return (
     <html>
-      <head></head>
       <body data-theme="light" className={className}>
         <W3Provider>
           <StyledComponentsRegistry>

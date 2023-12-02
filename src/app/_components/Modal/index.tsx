@@ -1,11 +1,11 @@
-import { AutoComplete, DatePicker, Form, Input, Modal, ModalProps, Select, message } from "antd";
-import React, { useEffect, useState } from "react";
-import "./styles.scss";
-import { Gender, User } from "@lib/web3/types";
-import { useForm } from "antd/es/form/Form";
 import { createNewPerson } from "@lib/web3/contractInteract";
+import { Gender } from "@lib/web3/types";
 import { useWeb3React } from "@web3-react/core";
+import { DatePicker, Form, Input, Modal, ModalProps, Select, message } from "antd";
+import { useForm } from "antd/es/form/Form";
+import React, { useEffect, useState } from "react";
 import CustomFormItem from "../FormItem";
+import "./styles.scss";
 interface Props extends ModalProps {
   onCreatedSuccess: () => void;
 }
@@ -53,6 +53,7 @@ const CustomModal: React.FC<Props> = ({ children, title, onCreatedSuccess, ...pr
     if (!props.open) {
       form.resetFields();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.open]);
 
   return (

@@ -1,4 +1,4 @@
-import { personAbi } from "@abis/personAbi";
+import { personAbi } from "@lib/web3/abis/personAbi";
 import { getContract } from "../helpers";
 import { JsonRpcSigner } from "@ethersproject/providers";
 import { Gender, User } from "../types";

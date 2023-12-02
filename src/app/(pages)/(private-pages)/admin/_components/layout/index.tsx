@@ -7,6 +7,8 @@ import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import HeaderApp from "../header";
 import "./styles.scss";
+import { useDispatch } from "react-redux";
+import { removeUser } from "@app/_stores/user";
 
 const { Sider, Content } = Layout;
 
@@ -32,6 +34,7 @@ interface ILayout {
 
 const AdminLayout: React.FC<ILayout> = ({ children }) => {
   const { disconnectWallet } = useConnectWallet();
+  const dispatch = useDispatch();
   const router = useRouter();
   const pathName = usePathname();
   const items: MenuItem[] = [
@@ -39,9 +42,10 @@ const AdminLayout: React.FC<ILayout> = ({ children }) => {
     getItem("Organizations", PATHS.OrganizationManagement()),
   ];
 
-  const handleLougout = () => {
-    // dispatch(setUser(null));
+  const onLogout = () => {
+    dispatch(removeUser());
     disconnectWallet();
+    router.push(PATHS.Login());
   };
 
   return (
@@ -63,7 +67,7 @@ const AdminLayout: React.FC<ILayout> = ({ children }) => {
         />
         <div className="other-action">
           <div className="other-action-menu"></div>
-          <Button onClick={handleLougout} className="other-action-btn">
+          <Button onClick={onLogout} className="other-action-btn">
             Log Out
           </Button>
         </div>

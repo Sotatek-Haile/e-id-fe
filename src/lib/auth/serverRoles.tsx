@@ -1,4 +1,3 @@
-import Denied from "@app/_components/Denied";
 import { COOKIES_KEY, PERMISSIONS } from "@app/_constants";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -22,14 +21,14 @@ function hasRequiredPermissions(permission: string): boolean {
  */
 export function withRoleServer<T extends object = object>(
   Component: ComponentType<T>,
-  permission: string
+  permission: string,
 ) {
   return function WithRolesWrapper(props: T) {
     const hasPermission = hasRequiredPermissions(permission);
     if (hasPermission) {
       return <Component {...props} />;
     } else {
-      return <Denied />;
+      return null;
     }
   };
 }
