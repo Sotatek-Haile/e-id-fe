@@ -1,12 +1,71 @@
 "use client";
-import CustomTable from "@app/_components/Table";
-import React, { useState } from "react";
-import "./styles.scss";
-import { Button, Form, Input } from "antd";
 import CreatePersonModal from "@app/_components/Modal";
-import { User } from "@lib/web3/types";
+import CustomTable from "@app/_components/Table";
+import { User } from "@app/_types/user";
+import { Gender } from "@lib/web3/types";
+import { Button, Space, Tag } from "antd";
+import { ColumnsType } from "antd/es/table";
+import dayjs from "dayjs";
+import { useState } from "react";
+import "./styles.scss";
+import { useGetAllUserQuery } from "./_apis";
 export default function Page() {
   const [openModal, setOpenModal] = useState(false);
+  const { data, isLoading } = useGetAllUserQuery({});
+
+  const columns: ColumnsType<User> = [
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: "Age",
+      dataIndex: "age",
+      key: "age",
+    },
+    {
+      title: "Gender",
+      dataIndex: "gender",
+      key: "gender",
+      render: (_, { gender }) => {
+        const genderText = gender === Gender.Female ? "Female" : "Male";
+        let color = "blue";
+        if (genderText === "Male") {
+          color = "red";
+        }
+        return <Tag color={color}>{genderText}</Tag>;
+      },
+    },
+    {
+      title: "Score",
+      key: "score",
+      dataIndex: "score",
+      render: (_, { score }) => {
+        let color = "green";
+        return <Tag color={color}>{score}</Tag>;
+      },
+    },
+    {
+      title: "DOB",
+      dataIndex: "dateOfBirth",
+      key: "dateOfBirth",
+      render: (_, { dateOfBirth }) => {
+        let color = "pink";
+        return <Tag color={color}>{dayjs(dateOfBirth).format("MM/DD/YYYY")}</Tag>;
+      },
+    },
+    {
+      title: "Action",
+      key: "action",
+      render: (_, record) => (
+        <Space size="middle">
+          <a>Edit</a>
+        </Space>
+      ),
+    },
+  ];
 
   return (
     <div className="person-page">
@@ -14,9 +73,10 @@ export default function Page() {
         <Button onClick={() => setOpenModal(true)}>Add new</Button>
       </div>
       <div className="body">
-        <CustomTable />
+        <CustomTable loading={isLoading} dataSource={data?.data || []} columns={columns} />
       </div>
       <CreatePersonModal
+        onCreatedSuccess={() => setOpenModal(false)}
         onCancel={() => setOpenModal(false)}
         title={"Add Person"}
         open={openModal}
