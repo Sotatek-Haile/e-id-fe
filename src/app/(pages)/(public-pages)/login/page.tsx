@@ -5,19 +5,19 @@ import { setUser } from "@app/_stores/user";
 import { ConnectorKey } from "@lib/web3/connectors";
 import { useConnectWallet } from "@lib/web3/hooks/useConnectWallet";
 import { Button } from "antd";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import "./styles.scss";
 
 const Login = () => {
-  // const router = useRouter();
+  const router = useRouter();
   const { connectWalletAndSignMessage } = useConnectWallet();
   const dispatch = useDispatch();
 
   async function onSignIn() {
     const data: any = await connectWalletAndSignMessage(ConnectorKey.metaMask);
     dispatch(setUser(data));
-    redirect(PATHS.home());
+    router.push(PATHS.home());
   }
   return (
     <div className="login">
