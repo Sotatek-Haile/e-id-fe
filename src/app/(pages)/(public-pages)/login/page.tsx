@@ -17,7 +17,7 @@ const Login = () => {
   async function onSignIn() {
     const data: any = await connectWalletAndSignMessage(ConnectorKey.metaMask);
     dispatch(setUser(data));
-    router.push(PATHS.home());
+    return router.push(PATHS.home());
   }
   return (
     <div className="login">

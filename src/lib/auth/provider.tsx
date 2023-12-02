@@ -9,7 +9,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const patch = headersList.get("x-pathname");
   const address = getAddress();
 
-  if (address !== process.env.NEXT_ADMIN_ADDRESS && patch !== "/") {
+  if (address !== process.env.NEXT_PUBLIC_ADMIN_ADDRESS && patch !== "/") {
     return redirect("/");
   }
 

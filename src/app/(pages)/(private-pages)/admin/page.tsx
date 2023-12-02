@@ -1,5 +1,6 @@
-import React from "react";
+import { PATHS } from "@app/_constants/path";
+import { redirect } from "next/navigation";
 
 export default function page() {
-  return <div>view user</div>;
+  redirect(PATHS.PersonManagement());
 }
