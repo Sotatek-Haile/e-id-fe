@@ -13,5 +13,5 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   //   return redirect("/");
   // }
 
-  return <section>{children}</section>;
+  return <>{children}</>;
 }

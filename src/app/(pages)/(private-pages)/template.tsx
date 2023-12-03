@@ -1,12 +1,19 @@
 "use client";
-import Loading from "@app/_components/Loading";
 import { useEagerConnect, useWalletListener } from "@lib/web3/hooks";
+import { Spin } from "antd";
 import React from "react";
 
 const RootLayout = ({ children }: React.PropsWithChildren & any) => {
   useWalletListener();
   const tried = useEagerConnect();
-  return <div>{tried ? <>{children}</> : <Loading />}</div>;
+  if (tried) return children;
+  return (
+    <div className="mt-[40vh]">
+      <Spin tip="Loading ..." size="large">
+        <div className="content" />
+      </Spin>
+    </div>
+  );
 };
 
 export default RootLayout;
