@@ -1,5 +1,6 @@
-import { createNewPerson } from "@lib/web3/contractInteract";
-import { Gender } from "@lib/web3/types";
+import { User } from "@app/_types/user";
+import { createNewPerson, editPerson } from "@lib/web3/contractInteract";
+import { GENDER, Gender } from "@lib/web3/types";
 import { useWeb3React } from "@web3-react/core";
 import { DatePicker, Form, Input, Modal, ModalProps, Select, message } from "antd";
 import { useForm } from "antd/es/form/Form";
@@ -8,6 +9,7 @@ import CustomFormItem from "../FormItem";
 import "./styles.scss";
 interface Props extends ModalProps {
   onCreatedSuccess: () => void;
+  data?: User;
 }
 type FormData = {
   name: string;
@@ -17,7 +19,13 @@ type FormData = {
   walletAddress: string;
 };
 
-const CustomModal: React.FC<Props> = ({ children, title, onCreatedSuccess, ...props }) => {
+const CreateUserModal: React.FC<Props> = ({
+  children,
+  title,
+  onCreatedSuccess,
+  data,
+  ...props
+}) => {
   const { provider } = useWeb3React();
   const [loading, setLoading] = useState(false);
 
@@ -44,17 +52,58 @@ const CustomModal: React.FC<Props> = ({ children, title, onCreatedSuccess, ...pr
       onCreatedSuccess();
     } catch (e) {
       console.log(e);
-      message.error("Fail to create person");
+      message.error("Fail to create user");
+    }
+    setLoading(false);
+  };
+
+  const handleEditPerson = async (editData: FormData) => {
+    try {
+      setLoading(true);
+      if (!provider) {
+        return;
+      }
+      const signer = provider.getSigner();
+      await editPerson({
+        tokenId: data?.tokenId || "",
+        signer,
+        user: {
+          name: editData.name,
+          age: editData.age,
+          gender: editData.gender,
+          score: editData.score,
+          sensitiveInformation: "0x",
+        },
+      });
+      message.success("Edit Successfully");
+      onCreatedSuccess();
+    } catch (e) {
+      console.log(e);
+      message.error("Fail to edit user");
     }
     setLoading(false);
   };
 
   useEffect(() => {
-    if (!props.open) {
-      form.resetFields();
-    }
+    form.setFieldsValue({
+      walletAddress: "",
+      name: data?.name,
+      age: data?.age,
+      gender: data?.gender ? (data.gender as Gender) : Gender.Female.toString(),
+      score: data?.score,
+      id: data?.tokenId,
+      bod: data?.dateOfBirth,
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.open]);
+
+  const handleSubmit = (newData: FormData) => {
+    if (data) {
+      handleEditPerson(newData);
+    } else {
+      handleCreateNewPerson(newData);
+    }
+  };
 
   return (
     <Modal
@@ -72,8 +121,17 @@ const CustomModal: React.FC<Props> = ({ children, title, onCreatedSuccess, ...pr
       <div className="modal__title">{title}</div>
       <div className="modal__body">
         <Form
+          initialValues={{
+            walletAddress: "",
+            name: data?.name,
+            age: data?.age,
+            gender: data?.gender ? (data.gender as Gender) : Gender.Female.toString(),
+            score: data?.score,
+            id: data?.tokenId,
+            bod: data?.dateOfBirth,
+          }}
           form={form}
-          onFinish={handleCreateNewPerson}
+          onFinish={handleSubmit}
           labelCol={{ span: 4 }}
           wrapperCol={{ span: 18 }}
           layout="horizontal"
@@ -88,7 +146,7 @@ const CustomModal: React.FC<Props> = ({ children, title, onCreatedSuccess, ...pr
             name={"walletAddress"}
             label="Wallet"
           >
-            <Input autoComplete="off" />
+            <Input disabled={!!data} autoComplete="off" />
           </Form.Item>
           <Form.Item
             rules={[
@@ -142,6 +200,9 @@ const CustomModal: React.FC<Props> = ({ children, title, onCreatedSuccess, ...pr
             regexOnChange={new RegExp(/\d+/)}
           />
           <CustomFormItem
+            inputProps={{
+              disabled: !!data,
+            }}
             form={form}
             rules={[
               {
@@ -172,4 +233,4 @@ const CustomModal: React.FC<Props> = ({ children, title, onCreatedSuccess, ...pr
   );
 };
 
-export default CustomModal;
+export default CreateUserModal;

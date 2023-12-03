@@ -8,8 +8,8 @@ export type Network = {
 };
 
 export enum Gender {
-  Male = 0,
-  Female = 1,
+  Male = 1,
+  Female = 2,
 }
 
 export type User = {
@@ -18,4 +18,14 @@ export type User = {
   age: number;
   score: number;
   sensitiveInformation: string;
+};
+
+export type Organization = {
+  name: string;
+  tax: string;
+  tokenId?: string;
+};
+export const GENDER = {
+  [Gender.Female]: "Female",
+  [Gender.Male]: "Male",
 };
