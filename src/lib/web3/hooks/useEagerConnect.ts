@@ -1,3 +1,4 @@
+"use client";
 import { useWeb3React } from "@web3-react/core";
 import { useEffect, useState } from "react";
 import { metaMask } from "../connectors/metamask";
@@ -20,7 +21,7 @@ export function useEagerConnect() {
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isActive]);
 
   return tried;
 }

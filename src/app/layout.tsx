@@ -1,6 +1,7 @@
 import "@app/_styles/globals.scss";
 import StyledComponentsRegistry from "@lib/antd/AntdRegistry";
 import ThemeConfigProvider from "@lib/antd/ConfigProvider";
+import { AuthProvider } from "@lib/auth/provider";
 import { locales } from "@lib/next-intl";
 import { ReduxProvider } from "@lib/redux/provider";
 import { W3Provider } from "@lib/web3/provider";
@@ -27,7 +28,9 @@ const RootLayout = async ({ children }: React.PropsWithChildren & any) => {
         <W3Provider>
           <StyledComponentsRegistry>
             <ReduxProvider>
-              <ThemeConfigProvider>{children}</ThemeConfigProvider>
+              <ThemeConfigProvider>
+                <AuthProvider>{children}</AuthProvider>
+              </ThemeConfigProvider>
             </ReduxProvider>
           </StyledComponentsRegistry>
         </W3Provider>

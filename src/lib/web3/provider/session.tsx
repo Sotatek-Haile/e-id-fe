@@ -3,7 +3,7 @@ import { useEagerConnect, useWalletListener } from "@lib/web3/hooks";
 import { Spin } from "antd";
 import React from "react";
 
-const RootLayout = ({ children }: React.PropsWithChildren & any) => {
+const W3Session = ({ children }: React.PropsWithChildren & any) => {
   useWalletListener();
   const tried = useEagerConnect();
   if (tried) return children;
@@ -16,4 +16,4 @@ const RootLayout = ({ children }: React.PropsWithChildren & any) => {
   );
 };
 
-export default RootLayout;
+export default W3Session;
