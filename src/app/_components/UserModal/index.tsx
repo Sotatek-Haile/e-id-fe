@@ -114,15 +114,15 @@ const CreateUserModal: React.FC<Props> = ({
 
   useEffect(() => {
     form.setFieldsValue({
-      walletAddress: "",
+      walletAddress: data?.ownerAddress,
       name: data?.name,
       age: data?.age,
       gender: data?.gender ? (data.gender as Gender) : Gender.Female.toString(),
       score: data?.score,
       id: data?.uid,
-      bod: data?.dateOfBirth,
+      bod: data?.dateOfBirth ? dayjs(data?.dateOfBirth) : undefined,
       address: data?.address,
-      organization: data?.organization,
+      organization: data?.organizationId,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.open]);
@@ -152,15 +152,15 @@ const CreateUserModal: React.FC<Props> = ({
       <div className="modal__body">
         <Form
           initialValues={{
-            walletAddress: "",
+            walletAddress: data?.ownerAddress,
             name: data?.name,
             age: data?.age,
             gender: data?.gender ? (data.gender as Gender) : Gender.Female.toString(),
             score: data?.score,
             id: data?.tokenId,
-            bod: data?.dateOfBirth,
+            bod: data?.dateOfBirth ? dayjs(data?.dateOfBirth) : undefined,
             address: data?.address,
-            organization: data?.organization,
+            organization: data?.organizationId,
           }}
           form={form}
           onFinish={handleSubmit}

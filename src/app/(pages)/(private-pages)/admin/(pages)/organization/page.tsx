@@ -6,11 +6,13 @@ import { Button, Space, Tag } from "antd";
 import { ColumnsType } from "antd/es/table";
 import React, { useState } from "react";
 import "./styles.scss";
+import { useGetAllOrganizationQuery } from "@app/_stores/admin/persons/api";
+import { ellipseAddress } from "@helpers";
 
 export default function Organization() {
   const [openModal, setOpenModal] = useState(false);
   const [selectedRecord, setSelectedRecord] = useState<any>();
-  // const { data, isLoading } = useGetAllUserQuery({});
+  const { data, isLoading } = useGetAllOrganizationQuery({});
 
   const columns: ColumnsType<User> = [
     {
@@ -21,18 +23,18 @@ export default function Organization() {
     },
     {
       title: "Tax",
-      dataIndex: "tax",
-      key: "tax",
+      dataIndex: "taxCode",
+      key: "taxCode",
     },
     {
-      title: "Owner",
-      dataIndex: "owner",
-      key: "owner",
-    },
-    {
-      title: "Address",
-      dataIndex: "address",
-      key: "address",
+      title: "Owner Address",
+      dataIndex: "ownerAddress",
+      key: "ownerAddress",
+      render: (text) => (
+        <a target="__blank" href={"https://mumbai.polygonscan.com/address/" + text}>
+          {ellipseAddress(text)}
+        </a>
+      ),
     },
     {
       title: "Action",
@@ -52,14 +54,6 @@ export default function Organization() {
     },
   ];
 
-  const fakeData = [
-    {
-      name: "Sotatek",
-      tax: "123456",
-      tokenId: "1",
-    },
-  ];
-
   return (
     <div className="organization-page">
       <div className="header">
@@ -73,7 +67,7 @@ export default function Organization() {
         </Button>
       </div>
       <div className="body">
-        <CustomTable loading={false} dataSource={fakeData} columns={columns} />
+        <CustomTable loading={isLoading} dataSource={data?.data || []} columns={columns} />
       </div>
       <OrganizationModal
         data={selectedRecord}

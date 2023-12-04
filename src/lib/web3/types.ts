@@ -24,6 +24,8 @@ export type Organization = {
   name: string;
   tax: string;
   tokenId?: string;
+  taxCode?: string;
+  ownerAddress?: string;
 };
 export const GENDER = {
   [Gender.Female]: "Female",

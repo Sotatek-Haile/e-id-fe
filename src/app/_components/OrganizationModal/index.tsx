@@ -1,6 +1,5 @@
-import { User } from "@app/_types/user";
 import { createOrganization, editOrganization } from "@lib/web3/contractInteract";
-import { GENDER, Gender, Organization } from "@lib/web3/types";
+import { Organization } from "@lib/web3/types";
 import { useWeb3React } from "@web3-react/core";
 import { Form, Input, Modal, ModalProps, message } from "antd";
 import { useForm } from "antd/es/form/Form";
@@ -34,7 +33,6 @@ const OrganizationModal: React.FC<Props> = ({
       if (!provider) {
         return;
       }
-      console.log("data", data);
       const signer = provider.getSigner();
       await createOrganization({
         walletAddress: data.walletAddress,
@@ -73,16 +71,16 @@ const OrganizationModal: React.FC<Props> = ({
       onCreatedSuccess();
     } catch (e) {
       console.log(e);
-      message.error("Fail to edit organization");
+      message.error("Failed to edit organization");
     }
     setLoading(false);
   };
 
   useEffect(() => {
     form.setFieldsValue({
-      walletAddress: "12",
+      walletAddress: data?.ownerAddress,
       name: data?.name,
-      tax: data?.tax,
+      tax: data?.taxCode,
     });
   }, [props.open]);
 
@@ -111,7 +109,7 @@ const OrganizationModal: React.FC<Props> = ({
       <div className="modal__body">
         <Form
           initialValues={{
-            walletAddress: "",
+            walletAddress: data?.ownerAddress,
             name: data?.name,
             tax: data?.tax,
           }}

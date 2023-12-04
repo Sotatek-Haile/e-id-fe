@@ -8,5 +8,7 @@ export type User = {
   id: string;
   uid: string;
   address: string;
-  organization?: string
+  organization?: any
+  ownerAddress?: string;
+  organizationId?: string;
 };

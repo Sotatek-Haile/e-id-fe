@@ -14,9 +14,8 @@ import { ellipseAddress } from "@helpers";
 export default function Page() {
   const [openModal, setOpenModal] = useState(false);
   const [selectedRecord, setSelectedRecord] = useState<any>();
-  const { data } = useGetAllUserQuery({});
+  const { data, isLoading } = useGetAllUserQuery({});
   const [openScoreModal, setOpenScoreModal] = useState(false);
-  console.log("data", data);
   const columns: ColumnsType<User> = [
     {
       title: "Name",
@@ -71,6 +70,17 @@ export default function Page() {
       },
     },
     {
+      title: "Address",
+      dataIndex: "address",
+      key: "address",
+    },
+    {
+      title: "Organization",
+      dataIndex: "organization",
+      key: "organization",
+      render: (item: any) => <div>{item?.name}</div>,
+    },
+    {
       title: "Action",
       key: "action",
       render: (_, record) => (
@@ -96,17 +106,6 @@ export default function Page() {
     },
   ];
 
-  const fakeData = [
-    {
-      name: "123",
-      age: "456",
-      gender: Gender.Female.toString(),
-      score: 100,
-      dateOfBirth: dayjs(),
-      tokenId: "3",
-    },
-  ];
-
   return (
     <div className="person-page">
       <div className="header">
@@ -120,7 +119,7 @@ export default function Page() {
         </Button>
       </div>
       <div className="body">
-        <CustomTable loading={false} dataSource={data?.data || fakeData} columns={columns} />
+        <CustomTable loading={isLoading} dataSource={data?.data || []} columns={columns} />
       </div>
       {openModal && (
         <PersonModal
