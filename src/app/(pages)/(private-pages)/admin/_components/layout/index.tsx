@@ -40,6 +40,7 @@ const AdminLayout: React.FC<ILayout> = ({ children }) => {
   const items: MenuItem[] = [
     getItem("Persons", PATHS.PersonManagement()),
     getItem("Organizations", PATHS.OrganizationManagement()),
+    getItem("Home", PATHS.home()),
   ];
 
   const onLogout = () => {
