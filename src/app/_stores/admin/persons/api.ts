@@ -12,6 +12,14 @@ const adminApi = baseQueryApi.injectEndpoints({
         };
       },
     }),
+    getAllOrganization: build.query<any, any>({
+      query: (params) => {
+        return {
+          url: "/organization/all",
+          method: "GET",
+        };
+      },
+    }),
   }),
 });
-export const { useGetAllUserQuery } = adminApi;
+export const { useGetAllUserQuery, useGetAllOrganizationQuery } = adminApi;

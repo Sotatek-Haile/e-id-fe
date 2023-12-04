@@ -6,4 +6,7 @@ export type User = {
   gender: number;
   dateOfBirth: string;
   id: string;
+  uid: string;
+  address: string;
+  organization?: string
 };

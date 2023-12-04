@@ -71,3 +71,31 @@ export const editOrganization = async (params: {
   });
   return await trx.wait();
 };
+
+export const addScore = async (params: {
+  signer?: JsonRpcSigner;
+  data: {
+    tokenId: string;
+    score: string;
+  };
+}) => {
+  const { signer, data } = params;
+  const contract: any = getContract(personAbi, process.env.NEXT_PUBLIC_PERSON_ADDRESS!, signer);
+
+  const trx = await contract.addScore(data.tokenId, data.score);
+  return await trx.wait();
+};
+
+export const subtractScore = async (params: {
+  signer?: JsonRpcSigner;
+  data: {
+    tokenId: string;
+    score: string;
+  };
+}) => {
+  const { signer, data } = params;
+  const contract: any = getContract(personAbi, process.env.NEXT_PUBLIC_PERSON_ADDRESS!, signer);
+
+  const trx = await contract.subtractScore(data.tokenId, data.score);
+  return await trx.wait();
+};

@@ -1,12 +1,15 @@
 import { User } from "@app/_types/user";
 import { createNewPerson, editPerson } from "@lib/web3/contractInteract";
-import { GENDER, Gender } from "@lib/web3/types";
+import { Gender } from "@lib/web3/types";
 import { useWeb3React } from "@web3-react/core";
 import { DatePicker, Form, Input, Modal, ModalProps, Select, message } from "antd";
 import { useForm } from "antd/es/form/Form";
 import React, { useEffect, useState } from "react";
 import CustomFormItem from "../FormItem";
 import "./styles.scss";
+import { ethers } from "ethers";
+import dayjs from "dayjs";
+import VoteeAutoComplete from "../AutoComplete";
 interface Props extends ModalProps {
   onCreatedSuccess: () => void;
   data?: User;
@@ -17,6 +20,10 @@ type FormData = {
   age: number;
   score: number;
   walletAddress: string;
+  id: string;
+  bod: string;
+  address: string;
+  organization: string;
 };
 
 const CreateUserModal: React.FC<Props> = ({
@@ -37,6 +44,19 @@ const CreateUserModal: React.FC<Props> = ({
         return;
       }
       const signer = provider.getSigner();
+      const abi = [
+        "string", // UID (cccd)
+        "string", // bod
+        "string", // user address
+        "string", // company id
+      ];
+      const encodedData = ethers.utils.defaultAbiCoder.encode(abi, [
+        data.id,
+        dayjs(data.bod).toISOString(),
+        data.address,
+        data?.organization || "0x",
+      ]);
+
       await createNewPerson({
         walletAddress: data.walletAddress,
         signer,
@@ -45,7 +65,7 @@ const CreateUserModal: React.FC<Props> = ({
           age: data.age,
           gender: data.gender,
           score: data.score,
-          sensitiveInformation: "0x",
+          sensitiveInformation: encodedData,
         },
       });
       message.success("Create Successfully");
@@ -64,6 +84,14 @@ const CreateUserModal: React.FC<Props> = ({
         return;
       }
       const signer = provider.getSigner();
+      const abi = [
+        "string", // UID (cccd)
+        "string", // bod
+      ];
+      const encodedData = ethers.utils.defaultAbiCoder.encode(abi, [
+        editData.id,
+        dayjs(editData.bod).toISOString(),
+      ]);
       await editPerson({
         tokenId: data?.tokenId || "",
         signer,
@@ -72,7 +100,7 @@ const CreateUserModal: React.FC<Props> = ({
           age: editData.age,
           gender: editData.gender,
           score: editData.score,
-          sensitiveInformation: "0x",
+          sensitiveInformation: encodedData,
         },
       });
       message.success("Edit Successfully");
@@ -91,8 +119,10 @@ const CreateUserModal: React.FC<Props> = ({
       age: data?.age,
       gender: data?.gender ? (data.gender as Gender) : Gender.Female.toString(),
       score: data?.score,
-      id: data?.tokenId,
+      id: data?.uid,
       bod: data?.dateOfBirth,
+      address: data?.address,
+      organization: data?.organization,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.open]);
@@ -129,11 +159,13 @@ const CreateUserModal: React.FC<Props> = ({
             score: data?.score,
             id: data?.tokenId,
             bod: data?.dateOfBirth,
+            address: data?.address,
+            organization: data?.organization,
           }}
           form={form}
           onFinish={handleSubmit}
-          labelCol={{ span: 4 }}
-          wrapperCol={{ span: 18 }}
+          labelCol={{ span: 6 }}
+          wrapperCol={{ span: 16 }}
           layout="horizontal"
         >
           <Form.Item
@@ -200,9 +232,6 @@ const CreateUserModal: React.FC<Props> = ({
             regexOnChange={new RegExp(/\d+/)}
           />
           <CustomFormItem
-            inputProps={{
-              disabled: !!data,
-            }}
             form={form}
             rules={[
               {
@@ -226,6 +255,26 @@ const CreateUserModal: React.FC<Props> = ({
             label="BOD"
           >
             <DatePicker disabledDate={(date) => date.isAfter()} />
+          </Form.Item>
+          <Form.Item
+            rules={[
+              {
+                required: true,
+                message: "Address is required field",
+              },
+            ]}
+            name={"address"}
+            label="Address"
+          >
+            <Input autoComplete="off" />
+          </Form.Item>
+          <Form.Item rules={[]} name={"organization"} label="Organization">
+            <VoteeAutoComplete
+              value={form.getFieldValue("organization")}
+              onSelect={(value) => {
+                form.setFieldValue("organization", value);
+              }}
+            />
           </Form.Item>
         </Form>
       </div>

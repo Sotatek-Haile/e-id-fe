@@ -34,7 +34,7 @@ export const useConnectWallet = () => {
     const connector = connectors[connectorKey];
     const chainId = parseInt(
       process.env.NEXT_PUBLIC_CHAIN_ID as string,
-      10
+      10,
     ) as keyof typeof SUPPORTED_NETWORKS;
 
     try {

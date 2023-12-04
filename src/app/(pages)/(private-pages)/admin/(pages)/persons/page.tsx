@@ -9,17 +9,30 @@ import dayjs from "dayjs";
 import { useState } from "react";
 import "./styles.scss";
 import { useGetAllUserQuery } from "../../../../../_stores/admin/persons/api";
+import UpdateScoreModal from "@app/_components/UpdateScoreModal";
+import { ellipseAddress } from "@helpers";
 export default function Page() {
   const [openModal, setOpenModal] = useState(false);
   const [selectedRecord, setSelectedRecord] = useState<any>();
-  const { data, isLoading } = useGetAllUserQuery({});
-
+  const { data } = useGetAllUserQuery({});
+  const [openScoreModal, setOpenScoreModal] = useState(false);
+  console.log("data", data);
   const columns: ColumnsType<User> = [
     {
       title: "Name",
       dataIndex: "name",
       key: "name",
       render: (text) => <a>{text}</a>,
+    },
+    {
+      title: "Wallet address",
+      dataIndex: "ownerAddress",
+      key: "ownerAddress",
+      render: (text) => (
+        <a target="__blank" href={"https://mumbai.polygonscan.com/address/" + text}>
+          {ellipseAddress(text)}
+        </a>
+      ),
     },
     {
       title: "Age",
@@ -70,6 +83,14 @@ export default function Page() {
           >
             Edit
           </Button>
+          <Button
+            onClick={() => {
+              setSelectedRecord(record);
+              setOpenScoreModal(true);
+            }}
+          >
+            Update Score
+          </Button>
         </Space>
       ),
     },
@@ -101,12 +122,21 @@ export default function Page() {
       <div className="body">
         <CustomTable loading={false} dataSource={data?.data || fakeData} columns={columns} />
       </div>
-      <PersonModal
+      {openModal && (
+        <PersonModal
+          data={selectedRecord}
+          onCreatedSuccess={() => setOpenModal(false)}
+          onCancel={() => setOpenModal(false)}
+          title={selectedRecord ? "Edit User" : "Add User"}
+          open={openModal}
+        />
+      )}
+      <UpdateScoreModal
         data={selectedRecord}
-        onCreatedSuccess={() => setOpenModal(false)}
-        onCancel={() => setOpenModal(false)}
+        onCreatedSuccess={() => setOpenScoreModal(false)}
+        onCancel={() => setOpenScoreModal(false)}
         title={selectedRecord ? "Edit User" : "Add User"}
-        open={openModal}
+        open={openScoreModal}
       />
     </div>
   );
