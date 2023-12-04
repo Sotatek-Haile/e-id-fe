@@ -1,11 +1,11 @@
+import { useGetMilesStoneQuery } from "@app/_stores/admin/persons/api";
 import { User } from "@app/_types/user";
-import { addScore, createNewPerson, editPerson, subtractScore } from "@lib/web3/contractInteract";
-import { GENDER, Gender } from "@lib/web3/types";
+import { addScore, subtractScore } from "@lib/web3/contractInteract";
+import { Gender } from "@lib/web3/types";
 import { useWeb3React } from "@web3-react/core";
-import { DatePicker, Form, Input, Modal, ModalProps, Select, message } from "antd";
+import { Form, Modal, ModalProps, Select, message } from "antd";
 import { useForm } from "antd/es/form/Form";
 import React, { useEffect, useState } from "react";
-import CustomFormItem from "../FormItem";
 import "./styles.scss";
 
 enum EventType {
@@ -46,14 +46,16 @@ const UpdateScoreModal: React.FC<Props> = ({
   const { provider } = useWeb3React();
   const [loading, setLoading] = useState(false);
 
+  const { data: milestoneData } = useGetMilesStoneQuery({});
+
   const [form] = useForm();
   const handleAddScore = async ({ eventId }: FormData) => {
-    console.log('eventId',eventId)
-    const foundEvent = EventMap.find((item) => item.id === eventId);
-    console.log(foundEvent)
+    console.log("eventId", eventId);
+    const foundEvent = (milestoneData?.data || []).find((item: any) => item._id === eventId);
+    console.log(foundEvent);
     try {
       setLoading(true);
-      console.log('provider',provider)
+      console.log("provider", provider);
       if (!provider) {
         return;
       }
@@ -62,7 +64,7 @@ const UpdateScoreModal: React.FC<Props> = ({
         signer,
         data: {
           tokenId: data?.tokenId || "",
-          score: foundEvent?.value.toString() || "",
+          score: foundEvent?.score.toString() || "",
         },
       });
       message.success("Update Successfully");
@@ -75,7 +77,7 @@ const UpdateScoreModal: React.FC<Props> = ({
   };
 
   const handleSubtractScore = async ({ eventId }: FormData) => {
-    const foundEvent = EventMap.find((item) => item.id === eventId);
+    const foundEvent = (milestoneData?.data || []).find((item: any) => item._id === eventId);
 
     try {
       setLoading(true);
@@ -105,8 +107,10 @@ const UpdateScoreModal: React.FC<Props> = ({
   }, [props.open]);
 
   const handleSubmit = (newData: FormData) => {
-    const foundEvent = EventMap.find((item) => item.id === newData.eventId);
-    console.log('newData',newData)
+    const foundEvent = (milestoneData?.data || []).find(
+      (item: any) => item._id === newData.eventId,
+    );
+
     if (foundEvent?.type === EventType.Subtract) {
       handleSubtractScore(newData);
     } else {
@@ -157,10 +161,10 @@ const UpdateScoreModal: React.FC<Props> = ({
           >
             {
               <Select placeholder="Select event" allowClear>
-                {EventMap.map((item) => {
+                {(milestoneData?.data || []).map((item: any) => {
                   return (
-                    <Select.Option key={item.id} value={item.id}>
-                      {item.label}
+                    <Select.Option key={item._id} value={item._id}>
+                      {item.name}
                     </Select.Option>
                   );
                 })}

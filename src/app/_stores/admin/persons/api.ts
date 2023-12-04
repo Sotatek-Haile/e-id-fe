@@ -20,6 +20,14 @@ const adminApi = baseQueryApi.injectEndpoints({
         };
       },
     }),
+    getMilesStone: build.query<any, any>({
+      query: (params) => {
+        return {
+          url: "/milestone/all",
+          method: "GET",
+        };
+      },
+    }),
   }),
 });
-export const { useGetAllUserQuery, useGetAllOrganizationQuery } = adminApi;
+export const { useGetAllUserQuery, useGetAllOrganizationQuery, useGetMilesStoneQuery } = adminApi;
