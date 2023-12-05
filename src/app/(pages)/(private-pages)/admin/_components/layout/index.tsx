@@ -46,7 +46,6 @@ const AdminLayout: React.FC<ILayout> = ({ children }) => {
   const onLogout = () => {
     dispatch(removeUser());
     disconnectWallet();
-    router.push(PATHS.Login());
   };
 
   return (

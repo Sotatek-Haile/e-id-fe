@@ -82,6 +82,7 @@ const OrganizationModal: React.FC<Props> = ({
       name: data?.name,
       tax: data?.taxCode,
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.open]);
 
   const handleSubmit = (newData: FormData) => {

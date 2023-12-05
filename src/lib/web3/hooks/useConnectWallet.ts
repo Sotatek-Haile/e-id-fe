@@ -6,13 +6,14 @@ import { ConnectorKey, connectors } from "../connectors";
 import { baseQueryApi } from "@lib/redux/baseQueryApi";
 import { useAppDispatch } from "@lib/redux/store";
 import { useRouter } from "next/navigation";
+import { removeUser } from "@app/_stores/user";
 /**
  * Hook for connect/disconnect to a wallet
  * @returns `connectWallet` and `disconnectWallet` functions .
  */
 export const useConnectWallet = () => {
   const { connector: appConnector } = useWeb3React();
-  const route = useRouter()
+  const route = useRouter();
   const dispatch = useAppDispatch();
   const getAccountConnected = async (provider: Web3Provider) => {
     const signer = provider.getSigner();
@@ -93,6 +94,7 @@ export const useConnectWallet = () => {
     appConnector?.deactivate && appConnector.deactivate();
     if (removeCache) {
       dispatch(baseQueryApi.util.resetApiState());
+      dispatch(removeUser());
     }
   }
 

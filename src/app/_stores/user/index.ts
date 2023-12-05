@@ -31,7 +31,6 @@ export const userSlice = createSlice({
       state.account = null;
       state.message = null;
       state.signature = null;
-
       Cookies.remove(COOKIES_KEY.ACCOUNT);
       Cookies.remove(COOKIES_KEY.TOKEN);
     },
