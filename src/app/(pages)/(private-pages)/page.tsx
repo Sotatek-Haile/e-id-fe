@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 "use client";
@@ -30,32 +31,32 @@ const { Header } = Layout;
 const items: CollapseProps["items"] = [
   {
     key: "1",
-    label: "Thông tin về việc cộng điểm",
+    label: "Information about point addition",
     children: (
       <p>
-        Việc công điểm sẽ được nhà nước quy định dựa vào các sự kiện trong đời của một người dân.
-        Vui lòng truy cập cổng thông tin chỉnh phủ để xem chi tiết
+        The awarding of points will be regulated by the state based on events in an individual's
+        life. Please visit the Government's information portal for details.
       </p>
     ),
   },
   {
     key: "2",
-    label: "Thông tin về việc trừ điểm",
+    label: "Information about point deduction",
     children: (
       <p>
-        Việc trừ điểm sẽ được nhà nước quy định dựa vào các sự kiện trong đời của một người dân. Vui
-        lòng truy cập cổng thông tin chỉnh phủ để xem chi tiết
+        The deduction of points will be regulated by the state based on events in an individual's
+        life. Please visit the Government's information portal for details.
       </p>
     ),
   },
   {
     key: "3",
-    label: "Thông tin chế tài và khen thưởng",
+    label: "Information about sanctions and rewards",
     children: (
       <p>
-        Việc áp dụng chế tài sẽ được cơ quan chức năng quản lý gần nhất đưa ra thông tin quyết định
-        và sự đồng tình của cơ quan cấp trên sẽ được nhà nước quy định dựa vào các sự kiện trong đời
-        của một người dân. Vui lòng truy cập cổng thông tin chỉnh phủ để xem chi tiết
+        The application of sanctions will be informed by the nearest relevant authority, and the
+        approval of the higher-level authority will be determined by the state based on events in an
+        individual's life. Please visit the Government's information portal for details.
       </p>
     ),
   },
@@ -64,7 +65,12 @@ const items: CollapseProps["items"] = [
 export default function Home() {
   const address = useSelector(getAccount) as string;
   const { data, isLoading } = useGetUserQuery(address) as any;
-  const formatter: any = (value: number) => <CountUp end={data?.data?.score || 0} separator="," />;
+  const formatter: any = (value: number) => (
+    <CountUp
+      end={data?.data?.history[data?.data?.history?.length - 1]?.score || data?.data?.score}
+      separator=","
+    />
+  );
   // const router = useRouter();
   const dispatch = useDispatch();
   const router = useRouter();
@@ -77,17 +83,7 @@ export default function Home() {
   };
 
   return (
-    <div
-      className="pb-10"
-      style={
-        {
-          // backgroundImage:
-          //   "url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Greater_coat_of_arms_of_the_United_States.svg/220px-Greater_coat_of_arms_of_the_United_States.svg.png)",
-          // backgroundSize: "cover",
-          // backgroundRepeat: "no-repeat",
-        }
-      }
-    >
+    <div className="pb-10">
       <Header className="flex bg-[#042869]">
         <div className="header-col header-brand flex">
           <div className="w-[50px] justify-center items-center flex">
@@ -135,50 +131,45 @@ export default function Home() {
                   />
                 }
               >
-                <Meta title="TRẦN NGUYỄN THỊ NHI" description="09878776724-HANOI" />
-                <Statistic title="Active Users" value={112893} formatter={formatter} />
+                <Meta title={data?.data?.name} description={data?.data?._id} />
+                <Statistic title="Active" value={112893} formatter={formatter} />
               </Card>
             </div>
             <div className="w-[78%]">
               <div className="pb-5 flex justify-between">
                 <div className="w-[48%] ]">
-                  <Card
-                    title="Thông tin chi tiết"
-                    bordered={false}
-                    style={{ width: "100%", height: 350 }}
-                  >
+                  <Card title="Detail Info" bordered={false} style={{ width: "100%", height: 350 }}>
                     <div className="flex justify-between">
-                      <b>Căn Cước Công Dân:</b> <p> {data?.data?.uid} </p>
+                      <b>Number ID:</b> <p> {data?.data?.uid} </p>
                     </div>
                     <div className="flex justify-between">
-                      <b>Tên:</b> <p>{data?.data?.name}</p>
+                      <b>Name:</b> <p>{data?.data?.name}</p>
                     </div>
                     <div className="flex justify-between">
-                      <b>Số Điện Thoại:</b> <p> 0987654321</p>
+                      <b>Birth Day:</b> <p>{data?.data?.dateOfBirth}</p>
                     </div>
                     <div className="flex justify-between">
-                      <b>Quê Quán:</b> <p> Sô nhà 11, ngõ 22, Xuân Thuỷ, Bắc Từ Liêm, Hà Nội</p>
+                      <b>Phone number:</b> <p> 0987654321</p>
                     </div>
                     <div className="flex justify-between">
-                      <b>Nơi thường trú::</b>
-                      <p> Sô nhà 11, ngõ 22, Xuân Thuỷ, Bắc Từ Liêm, Hà Nội</p>
+                      <b>Hometown:</b> <p> {data?.data?.address}</p>
                     </div>
                     <div className="flex justify-between">
-                      <b>Nơi cấp:</b> <p> Bắc Từ Liêm, Hà Nội</p>
+                      <b>Place of permanent residence:</b>
+                      <p>{data?.data?.age} years old</p>
                     </div>
                     <div className="flex justify-between">
-                      <b>Ngày cấp:</b> <p> 22/10/1990</p>
+                      <b>Age:</b> <p> {data?.data?.updatedAt}</p>
+                    </div>
+                    <div className="flex justify-between">
+                      <b>Created At:</b> <p> {data?.data?.updatedAt}</p>
                     </div>
                   </Card>
                 </div>
                 <div className="w-[48%]">
                   <div className="flex justify-between">
                     <div className="w-[48%]">
-                      <Card
-                        title="QR Đinh danh"
-                        bordered={false}
-                        style={{ width: "100%", height: 350 }}
-                      >
+                      <Card title="QR ID" bordered={false} style={{ width: "100%", height: 350 }}>
                         <QRCode
                           value={data?.data?._id}
                           className="w-full"
@@ -188,7 +179,11 @@ export default function Home() {
                       </Card>
                     </div>
                     <div className=" w-[48%]">
-                      <Card title="Vân tay" bordered={false} style={{ width: "100%", height: 350 }}>
+                      <Card
+                        title="Fingerprint"
+                        bordered={false}
+                        style={{ width: "100%", height: 350 }}
+                      >
                         <div className="rounded-lg">
                           <img
                             // className="mix-blend-color-burn"
@@ -201,7 +196,11 @@ export default function Home() {
                 </div>
               </div>
               <div>
-                <Card title="Events in life" bordered={false} style={{ width: "100%" }}>
+                <Card
+                  title={`Events in life (Your initial score is ${data?.data?.score})`}
+                  bordered={false}
+                  style={{ width: "100%" }}
+                >
                   <div className="flex">
                     <div className="w-[48%]">
                       {data?.data?.history?.length > 0 ? (
@@ -211,15 +210,15 @@ export default function Home() {
                             children: (
                               <div className="flex">
                                 <b className="text-yellow-600 pr-5">{x?.createdAt}: </b>
-                                <p>Khai sinh.</p>............... &nbsp;&nbsp;
+                                <p>{x?.milestone?.name}</p>............... &nbsp;&nbsp;
                                 <Avatar
                                   style={{
                                     paddingLeft: "20px",
-                                    backgroundColor: "#fde3cf",
+                                    backgroundColor: x.amount > 0 ? "green" : "red",
                                     color: "#fff",
                                   }}
                                 >
-                                  100
+                                  {x.amount}
                                 </Avatar>
                               </div>
                             ),
