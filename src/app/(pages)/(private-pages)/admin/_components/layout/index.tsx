@@ -52,7 +52,13 @@ const AdminLayout: React.FC<ILayout> = ({ children }) => {
     <Layout hasSider style={{ minHeight: "100vh" }}>
       <Sider width={250} className="awayday-sidebar-wrap" theme="light">
         <div className="sidebar-head">
-          <span className="sidebar-head-text">Admin Management</span>
+          <img
+            height={80}
+            width={80}
+            src={
+              "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Greater_coat_of_arms_of_the_United_States.svg/220px-Greater_coat_of_arms_of_the_United_States.svg.png"
+            }
+          />
         </div>
         <Menu
           className="sidebar-menu"

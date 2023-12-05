@@ -1,5 +1,5 @@
 .awayday-sidebar-wrap {
-  background-color: white;
+  background-color: #042869 !important;
   box-shadow: -40px -43px 39px 19px #989898;
   height: 100vh;
   position: fixed !important;
@@ -18,7 +18,9 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    justify-content: center;
     padding-left: 26px;
+    margin-top: 10px;
 
     &-space {
       width: 1px;
@@ -41,16 +43,24 @@
     border-bottom: 1px solid #e5e7eb;
     border-inline-end: none !important;
 
+    li {
+      &:hover {
+        color: #ffffff !important;
+
+      }
+    }
+
     .ant-menu-item {
       $color-tab-item: #4d4d4d;
 
       margin: 0;
-      color: #4d4d4d;
+      color: #ffffff;
       margin-bottom: 17px;
       height: 38px;
       border-radius: 5px;
       padding: 8px !important;
       width: 100%;
+      display: flex;
 
       .ant-menu-item-icon path {
         fill: #4d4d4d;
@@ -101,12 +111,12 @@
     }
 
     .ant-menu-item-selected {
-      background: rgba(238, 81, 30, 0.07);
+      background: rgb(255, 0, 0);
 
-      color: red;
+      color: rgb(255, 255, 255);
 
       .ant-menu-item-icon path {
-        fill: red;
+        fill: rgb(255, 255, 255);
         stroke: transparent;
       }
     }
