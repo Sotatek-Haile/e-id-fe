@@ -196,11 +196,7 @@ export default function Home() {
                 </div>
               </div>
               <div>
-                <Card
-                  title={`Events in life (Your initial score is ${data?.data?.score})`}
-                  bordered={false}
-                  style={{ width: "100%" }}
-                >
+                <Card title={`Events in life`} bordered={false} style={{ width: "100%" }}>
                   <div className="flex">
                     <div className="w-[48%]">
                       {data?.data?.history?.length > 0 ? (
