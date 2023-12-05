@@ -13,20 +13,6 @@ enum EventType {
   Subtract = "Subtract",
 }
 
-const EventMap = [
-  {
-    id: "1",
-    label: "Drunk",
-    value: 10,
-    type: EventType.Subtract,
-  },
-  {
-    id: "2",
-    label: "Granduate highschool",
-    value: 10,
-    type: EventType.Add,
-  },
-];
 
 interface Props extends ModalProps {
   onCreatedSuccess: () => void;
@@ -50,7 +36,7 @@ const UpdateScoreModal: React.FC<Props> = ({
 
   const [form] = useForm();
   const handleAddScore = async ({ eventId }: FormData) => {
-    const foundEvent = (milestoneData?.data || []).find((item: any) => item._id === eventId);
+    const foundEvent = (milestoneData?.data || []).find((item: any) => item.id === eventId);
     console.log(foundEvent);
     try {
       setLoading(true);
@@ -63,7 +49,7 @@ const UpdateScoreModal: React.FC<Props> = ({
         data: {
           tokenId: data?.tokenId || "",
           score: foundEvent?.score.toString() || "",
-          sId: foundEvent._id,
+          sId: foundEvent.id,
         },
       });
       message.success("Update Successfully");
@@ -76,7 +62,7 @@ const UpdateScoreModal: React.FC<Props> = ({
   };
 
   const handleSubtractScore = async ({ eventId }: FormData) => {
-    const foundEvent = (milestoneData?.data || []).find((item: any) => item._id === eventId);
+    const foundEvent = (milestoneData?.data || []).find((item: any) => item.id === eventId);
 
     try {
       setLoading(true);
@@ -89,7 +75,7 @@ const UpdateScoreModal: React.FC<Props> = ({
         data: {
           tokenId: data?.tokenId || "",
           score: foundEvent?.value.toString() || "",
-          sId: foundEvent._id,
+          sId: foundEvent.id,
         },
       });
       message.success("Update Successfully");
@@ -108,7 +94,7 @@ const UpdateScoreModal: React.FC<Props> = ({
 
   const handleSubmit = (newData: FormData) => {
     const foundEvent = (milestoneData?.data || []).find(
-      (item: any) => item._id === newData.eventId,
+      (item: any) => item.id === newData.eventId,
     );
 
     if (foundEvent?.type === EventType.Subtract) {
@@ -163,7 +149,7 @@ const UpdateScoreModal: React.FC<Props> = ({
               <Select placeholder="Select event" allowClear>
                 {(milestoneData?.data || []).map((item: any) => {
                   return (
-                    <Select.Option key={item._id} value={item._id}>
+                    <Select.Option key={item.id} value={item.id}>
                       {item.name}
                     </Select.Option>
                   );

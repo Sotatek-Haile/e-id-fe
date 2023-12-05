@@ -43,7 +43,7 @@ export default function MileStone() {
       render: (_, record: any) => (
         <Space size="middle">
           <Button
-            loading={record._id === loadingId}
+            loading={record.id === loadingId}
             onClick={async () => {
               try {
                 console.log("record", record._id);
