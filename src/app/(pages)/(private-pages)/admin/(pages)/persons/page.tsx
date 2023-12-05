@@ -2,7 +2,7 @@
 import PersonModal from "@app/_components/UserModal";
 import CustomTable from "@app/_components/Table";
 import { User } from "@app/_types/user";
-import { GENDER, Gender } from "@lib/web3/types";
+import { Gender } from "@lib/web3/types";
 import { Button, Space, Tag } from "antd";
 import { ColumnsType } from "antd/es/table";
 import dayjs from "dayjs";

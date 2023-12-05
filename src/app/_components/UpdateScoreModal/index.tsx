@@ -50,12 +50,10 @@ const UpdateScoreModal: React.FC<Props> = ({
 
   const [form] = useForm();
   const handleAddScore = async ({ eventId }: FormData) => {
-    console.log("eventId", eventId);
     const foundEvent = (milestoneData?.data || []).find((item: any) => item._id === eventId);
     console.log(foundEvent);
     try {
       setLoading(true);
-      console.log("provider", provider);
       if (!provider) {
         return;
       }
@@ -65,6 +63,7 @@ const UpdateScoreModal: React.FC<Props> = ({
         data: {
           tokenId: data?.tokenId || "",
           score: foundEvent?.score.toString() || "",
+          sId: foundEvent._id,
         },
       });
       message.success("Update Successfully");
@@ -90,6 +89,7 @@ const UpdateScoreModal: React.FC<Props> = ({
         data: {
           tokenId: data?.tokenId || "",
           score: foundEvent?.value.toString() || "",
+          sId: foundEvent._id,
         },
       });
       message.success("Update Successfully");

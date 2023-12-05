@@ -77,12 +77,13 @@ export const addScore = async (params: {
   data: {
     tokenId: string;
     score: string;
+    sId: string;
   };
 }) => {
   const { signer, data } = params;
   const contract: any = getContract(personAbi, process.env.NEXT_PUBLIC_PERSON_ADDRESS!, signer);
 
-  const trx = await contract.addScore(data.tokenId, data.score);
+  const trx = await contract.addScore(data.tokenId, data.sId, data.score);
   return await trx.wait();
 };
 
@@ -91,11 +92,12 @@ export const subtractScore = async (params: {
   data: {
     tokenId: string;
     score: string;
+    sId: string;
   };
 }) => {
   const { signer, data } = params;
   const contract: any = getContract(personAbi, process.env.NEXT_PUBLIC_PERSON_ADDRESS!, signer);
 
-  const trx = await contract.subtractScore(data.tokenId, data.score);
+  const trx = await contract.subtractScore(data.tokenId, data.sId, data.score);
   return await trx.wait();
 };
