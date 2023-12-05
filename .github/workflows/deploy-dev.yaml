@@ -1,0 +1,29 @@
+name: request-deploy
+run-name: 🚀 Deploy  by ${{ github.actor }}
+on:
+  push:
+    branches:
+      - "main"
+jobs:
+  Deploy:
+    runs-on: [self-hosted, self-hosted-urh]
+    steps:
+      - name: CHECKOUT
+        uses: actions/checkout@v3
+
+      - name: USE NODE
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18.18.2
+
+      - name: INSTALL LIBRARY
+        run: |
+          npm install
+
+      - name: BUILD
+        run: |
+          npm run build
+
+      - name: DEPLOY
+        run: |
+          pm2 reload pm2.json
