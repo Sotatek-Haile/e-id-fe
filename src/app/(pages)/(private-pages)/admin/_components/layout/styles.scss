@@ -145,8 +145,11 @@
         padding: 8px;
         border-radius: 5px;
 
-        &:hover {
-          background-color: rgba(0, 0, 0, 0.06);
+        button {
+          &:hover {
+            background-color: none;
+            color: white !important;
+          }
         }
 
         span {
@@ -178,7 +181,7 @@
 
       &:hover {
         border-color: rgba(70, 70, 70, 0.1) !important;
-        color: #3b3b3b !important;
+        color: #ffffff !important;
       }
     }
   }

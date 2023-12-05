@@ -73,7 +73,9 @@ const AdminLayout: React.FC<ILayout> = ({ children }) => {
         />
         <div className="other-action">
           <div className="other-action-menu"></div>
-          <Button onClick={onLogout} className="other-action-btn">
+          <Button style={{
+            color: 'white'
+          }} onClick={onLogout} className="other-action-btn">
             Log Out
           </Button>
         </div>
