@@ -13,7 +13,6 @@ enum EventType {
   Subtract = "Subtract",
 }
 
-
 interface Props extends ModalProps {
   onCreatedSuccess: () => void;
   data?: User;
@@ -74,7 +73,7 @@ const UpdateScoreModal: React.FC<Props> = ({
         signer,
         data: {
           tokenId: data?.tokenId || "",
-          score: foundEvent?.value.toString() || "",
+          score: foundEvent?.score ? foundEvent?.score.toString().replace("-", "") : "",
           sId: foundEvent.id,
         },
       });
@@ -93,11 +92,9 @@ const UpdateScoreModal: React.FC<Props> = ({
   }, [props.open]);
 
   const handleSubmit = (newData: FormData) => {
-    const foundEvent = (milestoneData?.data || []).find(
-      (item: any) => item.id === newData.eventId,
-    );
-
-    if (foundEvent?.type === EventType.Subtract) {
+    const foundEvent = (milestoneData?.data || []).find((item: any) => item.id === newData.eventId);
+    console.log("foundEvent", foundEvent);
+    if (foundEvent?.score.toString().includes("-")) {
       handleSubtractScore(newData);
     } else {
       handleAddScore(newData);
