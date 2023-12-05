@@ -1,7 +1,7 @@
 {
     "apps": [
         {
-            "name": "urh-user",
+            "name": "eid-ws",
             "script": "yarn start"
         }
     ]
