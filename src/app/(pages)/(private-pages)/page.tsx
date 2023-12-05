@@ -79,36 +79,40 @@ export default function Home() {
   return (
     <div
       className="pb-10"
-      style={{
-        backgroundImage:
-          "url(https://meliawedding.com.vn/wp-content/uploads/2022/11/AX51-vector-corel-trong-dong.jpg)",
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-      }}
+      style={
+        {
+          // backgroundImage:
+          //   "url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Greater_coat_of_arms_of_the_United_States.svg/220px-Greater_coat_of_arms_of_the_United_States.svg.png)",
+          // backgroundSize: "cover",
+          // backgroundRepeat: "no-repeat",
+        }
+      }
     >
-      <Header className="flex bg-[red]">
+      <Header className="flex bg-[#042869]">
         <div className="header-col header-brand flex">
           <div className="w-[50px] justify-center items-center flex">
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Emblem_of_Vietnam.svg/250px-Emblem_of_Vietnam.svg.png"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Greater_coat_of_arms_of_the_United_States.svg/220px-Greater_coat_of_arms_of_the_United_States.svg.png"
               alt=""
             />
           </div>
-          <h1 className="pl-10 text-[20px] text-[#fff] bold">E-ID (Cổng dịch vụ quốc gia)</h1>
+          <h1 className="pl-10 text-[20px] text-[#fff] bold">E-ID (National Service Portal)</h1>
         </div>
         <div className="header-col header-nav">
-          <Menu mode="horizontal" defaultSelectedKeys={["1"]}>
-            <Menu.Item key="1">
-              <Link href="/">
-                <span> Dashboard</span>
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="2">
-              <Link href={PATHS.PersonManagement()}>
-                <span>Admin</span>
-              </Link>
-            </Menu.Item>
-          </Menu>
+          {address === process.env.NEXT_PUBLIC_ADMIN_ADDRESS && (
+            <Menu mode="horizontal" defaultSelectedKeys={["1"]}>
+              <Menu.Item key="1">
+                <Link href="/">
+                  <span>Home</span>
+                </Link>
+              </Menu.Item>
+              <Menu.Item key="2">
+                <Link href={PATHS.PersonManagement()}>
+                  <span>Admin</span>
+                </Link>
+              </Menu.Item>
+            </Menu>
+          )}
         </div>
         <div className="header-col header-btn">
           <Button type="primary" onClick={onLogout} className="bg-yellow-600">
@@ -125,10 +129,7 @@ export default function Home() {
                 className="!w-full pb-5"
                 cover={
                   // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    alt="example"
-                    src="https://toigingiuvedep.vn/wp-content/uploads/2021/07/mau-anh-the-dep-than-thai.jpg"
-                  />
+                  <img alt="example" src="https://i.pravatar.cc/150?img=9" />
                 }
               >
                 <Meta title="TRẦN NGUYỄN THỊ NHI" description="09878776724-HANOI" />
@@ -175,7 +176,12 @@ export default function Home() {
                         bordered={false}
                         style={{ width: "100%", height: 350 }}
                       >
-                        <QRCode value={data?.data?._id} color={"yellow"} bgColor={"red"} />
+                        <QRCode
+                          value={data?.data?._id}
+                          className="w-full"
+                          color={"#eaa621"}
+                          bgColor={"#042869"}
+                        />
                       </Card>
                     </div>
                     <div className=" w-[48%]">
@@ -195,26 +201,35 @@ export default function Home() {
                 <Card title="Events in life" bordered={false} style={{ width: "100%" }}>
                   <div className="flex">
                     <div className="w-[48%]">
-                      <Timeline
-                        mode="left"
-                        items={data.data.history.map((x: any) => ({
-                          children: (
-                            <div className="flex">
-                              <b className="text-yellow-600 pr-5">{x?.createdAt}: </b>
-                              <p>Khai sinh.</p>............... &nbsp;&nbsp;
-                              <Avatar
-                                style={{
-                                  paddingLeft: "20px",
-                                  backgroundColor: "#fde3cf",
-                                  color: "#fff",
-                                }}
-                              >
-                                100
-                              </Avatar>
-                            </div>
-                          ),
-                        }))}
-                      />
+                      {data?.data?.history?.length > 0 ? (
+                        <Timeline
+                          mode="left"
+                          items={data?.data?.history.map((x: any) => ({
+                            children: (
+                              <div className="flex">
+                                <b className="text-yellow-600 pr-5">{x?.createdAt}: </b>
+                                <p>Khai sinh.</p>............... &nbsp;&nbsp;
+                                <Avatar
+                                  style={{
+                                    paddingLeft: "20px",
+                                    backgroundColor: "#fde3cf",
+                                    color: "#fff",
+                                  }}
+                                >
+                                  100
+                                </Avatar>
+                              </div>
+                            ),
+                          }))}
+                        />
+                      ) : (
+                        <div className="flex justify-center items-center">
+                          <Empty
+                            image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+                            imageStyle={{ height: 80 }}
+                          />
+                        </div>
+                      )}
                     </div>
                     <div className="w-[48%]">
                       <Collapse items={items} defaultActiveKey={["1", "2", "3"]} />
@@ -229,10 +244,14 @@ export default function Home() {
             {isLoading ? (
               <Spin />
             ) : (
-              <Empty
-                image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
-                imageStyle={{ height: 80 }}
-              />
+              <div className="flex justify-center items-center">
+                <Empty
+                  image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+                  imageStyle={{}}
+                  description=""
+                  className="justify-center items-center"
+                />
+              </div>
             )}
           </div>
         )}

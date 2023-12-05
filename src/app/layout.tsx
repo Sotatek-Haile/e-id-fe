@@ -11,8 +11,9 @@ import React from "react";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Unibit Horse Racing",
-  description: "Generated Unibit Horse Racing",
+  title: "E-ID",
+  description: "National Service Portal",
+  icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Greater_coat_of_arms_of_the_United_States.svg/220px-Greater_coat_of_arms_of_the_United_States.svg.png",
 };
 
 export function generateStaticParams() {
@@ -24,6 +25,12 @@ const RootLayout = async ({ children }: React.PropsWithChildren & any) => {
 
   return (
     <html>
+      <head>
+        <link
+          rel="icon"
+          href="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Greater_coat_of_arms_of_the_United_States.svg/220px-Greater_coat_of_arms_of_the_United_States.svg.png"
+        />
+      </head>
       <body data-theme="light" className={className}>
         <W3Provider>
           <StyledComponentsRegistry>

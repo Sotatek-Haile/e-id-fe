@@ -33,42 +33,42 @@ const Login = () => {
         <Content className="h-full">
           <Row gutter={[24, 0]} className="h-full" justify="space-around">
             <Col md={{ span: 12 }} className="!p-[200px]">
-              <Title className="mb-15 !text-red-600">Đăng nhập</Title>
+              <Title className="mb-15 !text-red-600">Welcome</Title>
               <Title className="font-regular text-muted !text-yellow-600" level={5}>
-                Cổng dịch vụ e-id thông tin người dân
+                E-ID Citizen Information Service Gateway
               </Title>
               <Form onFinish={onSignIn} layout="vertical" className="row-col">
                 <div className="py-5">
-                  <p className="!text-yellow-600">Sử dụng phương thức đăng nhập bằng ví metamask</p>
+                  <p className="!text-yellow-600">Use the login method with MetaMask wallet</p>
 
                   <p className="!text-yellow-600">
-                    Trường hợp chưa cài ví điện tử vu lòng tìm kiếm và cài đặt trên chợ ứng dụng của
-                    trình duyệt của bạn!
+                    In case you haven't installed an electronic wallet, please search and install it
+                    on your browser's app store!
                   </p>
                 </div>
 
                 <Form.Item>
                   <Button
                     type="primary"
-                    className="!bg-yellow-600"
+                    className="!bg-[#042869]"
                     htmlType="submit"
                     style={{ width: "100%" }}
                   >
-                    Đăng nhập
+                    Sign In
                   </Button>
                 </Form.Item>
                 <p className="font-semibold text-muted">
-                  Bạn đang có sự cố về tài khoản?&nbsp;
+                  Are you experiencing issues with your account?&nbsp;
                   <Link href="/sign-up" className="text-dark font-bold">
-                    Liên hệ
+                    Contact
                   </Link>
                 </p>
               </Form>
             </Col>
-            <Col className=" bg-red-600 " xs={{ span: 12 }}>
+            <Col className=" bg-[#042869] " xs={{ span: 12 }}>
               <div className=" w-full h-full justify-center items-center flex">
                 <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Emblem_of_Vietnam.svg/250px-Emblem_of_Vietnam.svg.png"
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Greater_coat_of_arms_of_the_United_States.svg/220px-Greater_coat_of_arms_of_the_United_States.svg.png"
                   alt=""
                 />
               </div>
