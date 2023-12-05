@@ -129,7 +129,10 @@ export default function Home() {
                 className="!w-full pb-5"
                 cover={
                   // eslint-disable-next-line @next/next/no-img-element
-                  <img alt="example" src="https://i.pravatar.cc/150?img=9" />
+                  <img
+                    alt="example"
+                    src={`https://i.pravatar.cc/150?img=${data?.data?._id.slice(1, 2)}`}
+                  />
                 }
               >
                 <Meta title="TRẦN NGUYỄN THỊ NHI" description="09878776724-HANOI" />
@@ -145,10 +148,10 @@ export default function Home() {
                     style={{ width: "100%", height: 350 }}
                   >
                     <div className="flex justify-between">
-                      <b>Căn Cước Công Dân:</b> <p> {data?.data?._id}</p>
+                      <b>Căn Cước Công Dân:</b> <p> {data?.data?.uid} </p>
                     </div>
                     <div className="flex justify-between">
-                      <b>Tên:</b> <p> {data?.data?.name}</p>
+                      <b>Tên:</b> <p>{data?.data?.name}</p>
                     </div>
                     <div className="flex justify-between">
                       <b>Số Điện Thoại:</b> <p> 0987654321</p>
