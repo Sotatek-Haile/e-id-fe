@@ -27,7 +27,33 @@ const adminApi = baseQueryApi.injectEndpoints({
           method: "GET",
         };
       },
+      providesTags: ["list-milestone"],
+    }),
+    createMilestone: build.mutation<any, any>({
+      query: (params) => {
+        return {
+          url: "/milestone",
+          method: "POST",
+          body: params,
+        };
+      },
+      invalidatesTags: ["list-milestone"],
+    }),
+    removeMilestone: build.mutation<any, any>({
+      query: (params) => {
+        return {
+          url: "/milestone/" + params.id,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["list-milestone"],
     }),
   }),
 });
-export const { useGetAllUserQuery, useGetAllOrganizationQuery, useGetMilesStoneQuery } = adminApi;
+export const {
+  useGetAllUserQuery,
+  useGetAllOrganizationQuery,
+  useGetMilesStoneQuery,
+  useCreateMilestoneMutation,
+  useRemoveMilestoneMutation,
+} = adminApi;

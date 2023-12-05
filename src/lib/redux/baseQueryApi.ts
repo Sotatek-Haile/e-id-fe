@@ -69,7 +69,7 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 
 export const baseQueryApi = createApi({
   baseQuery: baseQueryWithReauth,
-  tagTypes: ["stream-token"],
+  tagTypes: ["stream-token", "list-milestone"],
   endpoints: () => ({}),
   keepUnusedDataFor: 0,
 });

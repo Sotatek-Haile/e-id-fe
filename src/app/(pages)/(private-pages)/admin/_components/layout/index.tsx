@@ -40,6 +40,7 @@ const AdminLayout: React.FC<ILayout> = ({ children }) => {
   const items: MenuItem[] = [
     getItem("Persons", PATHS.PersonManagement()),
     getItem("Organizations", PATHS.OrganizationManagement()),
+    getItem("Milestones", PATHS.MileStone()),
     getItem("Home", PATHS.home()),
   ];
 
@@ -73,9 +74,13 @@ const AdminLayout: React.FC<ILayout> = ({ children }) => {
         />
         <div className="other-action">
           <div className="other-action-menu"></div>
-          <Button style={{
-            color: 'white'
-          }} onClick={onLogout} className="other-action-btn">
+          <Button
+            style={{
+              color: "white",
+            }}
+            onClick={onLogout}
+            className="other-action-btn"
+          >
             Log Out
           </Button>
         </div>
