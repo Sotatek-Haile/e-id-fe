@@ -70,9 +70,13 @@ const CreateUserModal: React.FC<Props> = ({
       });
       message.success("Create Successfully");
       onCreatedSuccess();
-    } catch (e) {
-      console.log(e);
-      message.error("Fail to create user");
+    } catch (e: any) {
+      console.log(e.message);
+      if (e.message.includes("Each user must have 1 NFT")) {
+        message.error("User already exists");
+      } else {
+        message.error("Fail to create user");
+      }
     }
     setLoading(false);
   };
