@@ -246,7 +246,7 @@ export default function Home() {
                 <Empty
                   image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
                   imageStyle={{}}
-                  description=""
+                  description="Account has not been identified!"
                   className="justify-center items-center"
                 />
               </div>
