@@ -9,9 +9,13 @@ import { metaMask } from "../connectors/metamask";
  */
 export function useEagerConnect() {
   const [tried, setTried] = useState(false);
+  const [noMetamask, setNoMetamask] = useState(false);
   const { isActive } = useWeb3React();
 
   useEffect(() => {
+    if (!window.ethereum) {
+      setNoMetamask(true);
+    }
     if (!isActive) {
       (window.ethereum as any)?._metamask.isUnlocked().then(async (isUnlock: any) => {
         if (isUnlock) {
@@ -23,5 +27,5 @@ export function useEagerConnect() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isActive]);
 
-  return tried;
+  return { noMetamask, tried };
 }
