@@ -21,6 +21,7 @@ import {
   Statistic,
   Timeline,
 } from "antd";
+import dayjs from "dayjs";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import CountUp from "react-countup";
@@ -112,7 +113,7 @@ export default function Home() {
         </div>
         <div className="header-col header-btn">
           <Button type="primary" onClick={onLogout} className="bg-yellow-600">
-            Đăng Xuất
+            Sign out
           </Button>
         </div>
       </Header>
@@ -146,7 +147,7 @@ export default function Home() {
                       <b>Name:</b> <p>{data?.data?.name}</p>
                     </div>
                     <div className="flex justify-between">
-                      <b>Birth Day:</b> <p>{data?.data?.dateOfBirth}</p>
+                      <b>Birth Day:</b> <p>{dayjs(data?.data?.dateOfBirth).format("DD/MM/YYYY")}</p>
                     </div>
                     <div className="flex justify-between">
                       <b>Phone number:</b> <p> 0987654321</p>
@@ -156,13 +157,13 @@ export default function Home() {
                     </div>
                     <div className="flex justify-between">
                       <b>Place of permanent residence:</b>
-                      <p>{data?.data?.age} years old</p>
+                      <p>{data?.data?.address}</p>
                     </div>
                     <div className="flex justify-between">
-                      <b>Age:</b> <p> {data?.data?.updatedAt}</p>
+                      <b>Age:</b> <p> {data?.data?.age}</p>
                     </div>
                     <div className="flex justify-between">
-                      <b>Created At:</b> <p> {data?.data?.updatedAt}</p>
+                      <b>Created At:</b> <p> {dayjs(data?.data?.updatedAt).format("DD/MM/YYYY")}</p>
                     </div>
                   </Card>
                 </div>
